@@ -1,0 +1,7 @@
+[Unit]
+Description=evil sensor on %I interface
+
+[Service]
+ExecStart=-/home/pi/evil-sensor.py %I
+Restart=always
+RestartSec=5
