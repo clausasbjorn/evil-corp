@@ -15,7 +15,6 @@
     <None Include="Scripts\Update-VersionNumber.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EvilCorp.EventStore\EvilCorp.EventStore.fsproj" />
     <ProjectReference Include="..\EvilCorp.Ingest\EvilCorp.Ingest.fsproj" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Service Fabric Tools\Microsoft.VisualStudio.Azure.Fabric.ApplicationProject.targets" />
