@@ -10,14 +10,15 @@
     <Grid Padding="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid.Background>
+        <!--<Grid.Background>
             <ImageBrush ImageSource="/Assets/unicorn-profile.png" Stretch="UniformToFill" />
-        </Grid.Background>
-        <Image Source="{Binding ControlQrc}"  Margin="50,50,50,50" Width="{Binding Path=Height, RelativeSource={RelativeSource Self}}" VerticalAlignment="Stretch" Grid.Row="0"  Grid.Column="1" />
+        </Grid.Background>-->
+        <Image Source="/Assets/unicorn-profile.png" Margin="10,10,10,10" Width="{Binding Path=Height, RelativeSource={RelativeSource Self}}" VerticalAlignment="Stretch" Grid.Row="0"  Grid.Column="0"/>
+        <Image Source="{Binding ControlQrc}"  Margin="10,10,10,10" Width="{Binding Path=Height, RelativeSource={RelativeSource Self}}" VerticalAlignment="Stretch" Grid.Row="0"  Grid.Column="1" />
     </Grid>
 </Page>
