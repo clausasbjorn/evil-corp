@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
@@ -11,7 +12,11 @@ namespace EvilCorp.SignalHub
         public void Configuration(IAppBuilder app)
         {
             app.UseCors(CorsOptions.AllowAll);
-            app.MapSignalR();
+            app.MapSignalR("/signalr", new HubConfiguration()
+            {
+                EnableJavaScriptProxies = true,
+                EnableDetailedErrors = true
+            });
         }
     }
 }
