@@ -34,13 +34,14 @@ type TrackerController() =
     [<Route("track")>]
     member this.Track(request : HttpRequestMessage) = 
         async {
-            let! json = request.Content.ReadAsStringAsync() |> Async.AwaitTask
-
-            try
-                EventHub.send json
-            with
-            | :? Exception -> ()
-
             return true
+//            let! json = request.Content.ReadAsStringAsync() |> Async.AwaitTask
+//
+//            try
+//                EventHub.send json
+//            with
+//            | :? Exception -> ()
+//
+//            return true
         } |> Async.StartAsTask
 
