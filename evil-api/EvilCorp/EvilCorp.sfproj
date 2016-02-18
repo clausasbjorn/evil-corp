@@ -16,6 +16,10 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EvilCorp.Ingest\EvilCorp.Ingest.fsproj" />
+    <ProjectReference Include="..\EvilCorp.People\EvilCorp.People.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pkg\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Service Fabric Tools\Microsoft.VisualStudio.Azure.Fabric.ApplicationProject.targets" />
 </Project>
