@@ -2,3 +2,5 @@ Microsoft.ServiceFabric
 Microsoft.ServiceFabric.Data
 Microsoft.ServiceFabric.Services
 Microsoft.AspNet.WebApi.OwinSelfHost
+Microsoft.WindowsAzure.ConfigurationManager
+WindowsAzure.ServiceBus
