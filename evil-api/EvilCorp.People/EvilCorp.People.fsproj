@@ -5,14 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>d0511e4f-d63a-467f-8844-584f8b3b3e9b</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>EvilCorp.EventStore.Interfaces</RootNamespace>
-    <AssemblyName>EvilCorp.EventStore.Interfaces</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <ProjectGuid>d2ee2192-b470-47f5-9ab0-15e6ad296f00</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>EvilCorp.People</RootNamespace>
+    <AssemblyName>EvilCorp.People</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>EvilCorp.EventStore.Interfaces</Name>
+    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <Name>EvilCorp.People</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
@@ -23,7 +23,9 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\EvilCorp.EventStore.Interfaces.XML</DocumentationFile>
+    <PlatformTarget>x64</PlatformTarget>
+    <DocumentationFile>bin\Debug\EvilCorp.People.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <DebugType>pdbonly</DebugType>
@@ -32,7 +34,9 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\EvilCorp.EventStore.Interfaces.XML</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Release\EvilCorp.People.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -44,9 +48,25 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PackageRoot\Config\Settings.xml" />
+    <Content Include="PackageRoot\ServiceManifest.xml" />
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="IEventStore.fs" />
-    <Compile Include="EventStoreConnectionFactory.fs" />
+    <Compile Include="Person.fs" />
+    <Compile Include="Program.fs" />
+    <None Include="App.config" />
+    <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EvilCorp.Common\EvilCorp.Common.fsproj">
+      <Name>EvilCorp.Common</Name>
+      <Project>{86f5fb31-2012-4a41-9594-27d0bf9dbbf0}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\EvilCorp.People.Interface\EvilCorp.People.Interface.fsproj">
+      <Name>EvilCorp.People.Interface</Name>
+      <Project>{ceb2146d-9c2d-4cbb-bc97-6eba6e251363}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -94,6 +114,24 @@
   </Choose>
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
+      <PropertyGroup>
+        <__paket__Microsoft_ServiceFabric_Actors_targets>Microsoft.ServiceFabric.Actors</__paket__Microsoft_ServiceFabric_Actors_targets>
+      </PropertyGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
+      <ItemGroup>
+        <Reference Include="Microsoft.ServiceFabric.Actors">
+          <HintPath>..\packages\Microsoft.ServiceFabric.Actors\lib\net45\Microsoft.ServiceFabric.Actors.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="Microsoft.ServiceFabric.Data">
           <HintPath>..\packages\Microsoft.ServiceFabric.Data\lib\net45\Microsoft.ServiceFabric.Data.dll</HintPath>
@@ -126,4 +164,5 @@
       </ItemGroup>
     </When>
   </Choose>
+  <Import Project="..\packages\Microsoft.ServiceFabric.Actors\build\$(__paket__Microsoft_ServiceFabric_Actors_targets).targets" Condition="Exists('..\packages\Microsoft.ServiceFabric.Actors\build\$(__paket__Microsoft_ServiceFabric_Actors_targets).targets')" Label="Paket" />
 </Project>

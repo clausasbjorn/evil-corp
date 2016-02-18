@@ -6,6 +6,8 @@ open System.Threading.Tasks
 open System.Net.Http
 open System.Threading.Tasks
 open Microsoft.ServiceBus.Messaging
+open EvilCorp.People.Interface
+open Microsoft.ServiceFabric.Actors
 
 //open EvilCorp.EventStore.Interfaces
 
@@ -21,6 +23,9 @@ module EventHub =
         let bytes = message |> toBytes
         let event = new EventData(bytes)
         hub.Send(event)
+
+    let call message =
+        PersonFactory.createPerson (new ActorId(""))
 
 type TrackerController() =
     inherit ApiController()
