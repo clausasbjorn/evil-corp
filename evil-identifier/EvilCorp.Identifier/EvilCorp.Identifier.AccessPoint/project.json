@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
+    "Microsoft.AspNet.SignalR.Client": "2.2.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+    "PropertyChanged.Fody": "1.50.4"
   },
   "frameworks": {
     "uap10.0": {}

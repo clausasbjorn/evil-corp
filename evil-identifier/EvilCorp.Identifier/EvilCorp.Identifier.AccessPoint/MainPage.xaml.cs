@@ -25,6 +25,7 @@ namespace EvilCorp.Identifier.AccessPoint
         public MainPage()
         {
             this.InitializeComponent();
+            DataContext = new EvilViewModel();
         }
     }
 }
