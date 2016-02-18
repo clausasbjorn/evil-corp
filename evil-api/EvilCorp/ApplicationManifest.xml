@@ -2,16 +2,9 @@
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="EvilCorpType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
    <Parameters>
       <Parameter Name="Ingest_InstanceCount" DefaultValue="1" />
-      <Parameter Name="EventStore_MinReplicaSetSize" DefaultValue="2" />
-      <Parameter Name="EventStore_PartitionCount" DefaultValue="1" />
-      <Parameter Name="EventStore_TargetReplicaSetSize" DefaultValue="3" />
    </Parameters>
    <ServiceManifestImport>
       <ServiceManifestRef ServiceManifestName="EvilCorp.IngestPkg" ServiceManifestVersion="1.0.0" />
-      <ConfigOverrides />
-   </ServiceManifestImport>
-   <ServiceManifestImport>
-      <ServiceManifestRef ServiceManifestName="EvilCorp.EventStorePkg" ServiceManifestVersion="1.0.0" />
       <ConfigOverrides />
    </ServiceManifestImport>
    <DefaultServices>
@@ -19,11 +12,6 @@
          <StatelessService ServiceTypeName="IngestType" InstanceCount="[Ingest_InstanceCount]">
             <SingletonPartition />
          </StatelessService>
-      </Service>
-      <Service Name="EventStore">
-         <StatefulService ServiceTypeName="EventStoreType" TargetReplicaSetSize="[EventStore_TargetReplicaSetSize]" MinReplicaSetSize="[EventStore_MinReplicaSetSize]">
-            <UniformInt64Partition PartitionCount="[EventStore_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
-         </StatefulService>
       </Service>
    </DefaultServices>
 </ApplicationManifest>

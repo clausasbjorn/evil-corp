@@ -5,3 +5,5 @@ nuget Microsoft.ServiceFabric 4.4.87-preview
 nuget Microsoft.ServiceFabric.Data 1.4.87-preview
 nuget Microsoft.ServiceFabric.Services 1.4.87-preview
 nuget Microsoft.AspNet.WebApi.OwinSelfHost 5.2.3
+nuget Microsoft.WindowsAzure.ConfigurationManager 3.1.0
+nuget WindowsAzure.ServiceBus 3.1.3
