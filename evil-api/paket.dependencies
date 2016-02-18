@@ -1,6 +1,7 @@
 source https://www.nuget.org/api/v2/
 framework = net450
 
+
 nuget Microsoft.ServiceFabric 4.4.87-preview
 nuget Microsoft.ServiceFabric.Data 1.4.87-preview
 nuget Microsoft.ServiceFabric.Services 1.4.87-preview
