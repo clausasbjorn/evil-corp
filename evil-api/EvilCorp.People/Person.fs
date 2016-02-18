@@ -9,6 +9,8 @@ open Microsoft.ServiceFabric
 open Microsoft.ServiceFabric.Actors
 open EvilCorp.Common.Actors
 open EvilCorp.People.Interface
+open EvilCorp.People.Messages
+open Newtonsoft.Json
 
 type Status =
     | Present = 0uy
@@ -22,8 +24,16 @@ type PersonState = {
     [<DataMember>] Status : byte  }
 
 module PersonBehavior =
-    let received presence state =
-        state
+
+    let lastSeen state =
+        { Id = state.Identifier ; LastSeen = state.LastSeen }
+        |> JsonConvert.SerializeObject
+        |> EventPush.send 
+        
+    let received (presence : Presence) state =
+        let update = { state with Status = (byte Status.Present) ; LastSeen = presence.Timestamp }
+        update |> lastSeen
+        update
 
     let initPerson actorId =
         { Identifier = actorId

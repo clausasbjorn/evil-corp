@@ -5,27 +5,32 @@ open System.Web.Http
 open System.Threading.Tasks
 open System.Net.Http
 open System.Threading.Tasks
-open Microsoft.ServiceBus.Messaging
+open Microsoft.ServiceFabric.Actors
+open FSharp.Data
 open EvilCorp.People.Interface
 open Microsoft.ServiceFabric.Actors
 
-//open EvilCorp.EventStore.Interfaces
+module Tracker =
 
-module EventHub =
-    let connectionString = "Endpoint=sb://relay-dev.servicebus.windows.net/;SharedAccessKeyName=SendRule;SharedAccessKey=jgHFGM/uEC+KxYfk004dxPWJC5INfhKV5dP+yesKY/Q="
-    let eventHubName = "evil-hub"
-    let hub = EventHubClient.CreateFromConnectionString(connectionString, eventHubName)
+    type EventParser = JsonProvider<""" {"SSID": "Swebus 0044", "Antenna": 1, "timestamp": "2016-02-18T18:53:30.845789", "Rate": 2, "node_name": "b8:27:eb:fc:80:ea", "source": "6c:40:08:b2:7e:de", "b14": 0, "ChannelNumber": 1, "Flags": 0, "dBm_AntSignal": -71, "Channel": 2412, "target": "ff:ff:ff:ff:ff:ff"} """>
     
-    let toBytes (message : string) = 
-        System.Text.Encoding.UTF8.GetBytes(message) 
-        
-    let send message =
-        let bytes = message |> toBytes
-        let event = new EventData(bytes)
-        hub.Send(event)
+    let private parse json = 
+        json |> EventParser.Parse
 
-    let call message =
-        PersonFactory.createPerson (new ActorId(""))
+    let push json =
+        let presence =
+            json 
+            |> parse
+            |> (fun o -> { Identifier = o.Source ; Channel = o.ChannelNumber ; Signal = o.DBmAntSignal ; Timestamp = o.Timestamp })
+
+        let person =
+            presence.Identifier
+            |> ActorId
+            |> PersonFactory.createPerson 
+
+        presence |> person.Seen |> ignore
+
+        ()
 
 type TrackerController() =
     inherit ApiController()
@@ -39,14 +44,13 @@ type TrackerController() =
     [<Route("track")>]
     member this.Track(request : HttpRequestMessage) = 
         async {
+            let! json = request.Content.ReadAsStringAsync() |> Async.AwaitTask
+
+            try
+                Tracker.push json
+            with
+            | :? Exception -> ()
+
             return true
-//            let! json = request.Content.ReadAsStringAsync() |> Async.AwaitTask
-//
-//            try
-//                EventHub.send json
-//            with
-//            | :? Exception -> ()
-//
-//            return true
         } |> Async.StartAsTask
 

@@ -5,7 +5,7 @@ open Microsoft.ServiceFabric.Actors
 
 module PersonFactory =
 
-    let personUrl = new Uri("fabric:/Relay.Sensors/EmailSensorActorService");
+    let personUrl = new Uri("fabric:/EvilCorp/PersonActorService");
     
     let createPerson actorId =
         ActorProxy.Create<IPerson>(actorId, personUrl)

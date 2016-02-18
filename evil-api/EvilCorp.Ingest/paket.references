@@ -5,3 +5,4 @@ Microsoft.ServiceFabric.Actors
 Microsoft.AspNet.WebApi.OwinSelfHost
 Microsoft.WindowsAzure.ConfigurationManager
 WindowsAzure.ServiceBus
+FSharp.Data
