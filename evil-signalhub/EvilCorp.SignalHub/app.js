@@ -84,22 +84,22 @@
 
         var update = function(scope, o) {
             var id = o.Id;
-
             scope.users[id] = {
                 id: id,
                 lastMessage: new Date(),
                 locations: o.Locations
             };
 
-            
             for (var i = 0; i < o.Locations.length; i++) {
                 var location = o.Locations[i];
                 var hotspot = location.Hotspot;
                 var index = scope.locationIndex[hotspot];
-                
+                var signalStrength = location.SignalStrength;
+
                 scope.locations[index].users[id] = {
                     id: id,
-                    lastMessage: new Date()
+                    lastMessage: new Date(),
+                    signalStrength: signalStrength
                 }
             }
         }

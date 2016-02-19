@@ -34,10 +34,12 @@ type EventProcessor() =
                 messages
                 |> Seq.iter(fun data -> 
                     let json = Encoding.UTF8.GetString(data.GetBytes())
-                    Console.WriteLine(String.Format("Message received: {0}", json))
+                    Console.Write(".")
+                    ()
+                    //Console.WriteLine(String.Format("Message received: {0}", json))
                 )
 
-                match (stopwatch.Elapsed > TimeSpan.FromMinutes(5.0)) with
+                match (stopwatch.Elapsed > TimeSpan.FromMinutes(1.0)) with
                 | true -> 
                     context.CheckpointAsync() 
                     |> Async.AwaitTask
