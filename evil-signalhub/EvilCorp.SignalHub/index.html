@@ -51,7 +51,7 @@
                 <div class="beacon-sub-header"> {{ locationPeopleCount[2] }} consumer<span ng-show="locationPeopleCount[2] != 1">s</span> present </div>
 
                 <div class="person" ng-repeat="(key, value) in locations[2].users">
-                    <div class="id">{{ value.id }} {{ value.signalStrength }} <span class="align-right">{{ value.signalStrength }}</span></div>
+                    <div class="id">{{ value.id }} <span class="align-right">{{ value.signalStrength }}</span></div>
                 </div>
 
             </div>

@@ -43,7 +43,7 @@ module PersonBehavior =
         | false -> state.Locations.Add(presence.Hotspot, { Hotspot = presence.Hotspot ; LastSeen = presence.Timestamp ; Channel = presence.Channel ; Signal = presence.Signal ; FirstSeen = DateTime.UtcNow })
 
         match state.Count with
-        | 20 ->
+        | 5 ->
             state.Locations.Keys
             |> Seq.map(fun key -> 
                 let location = state.Locations.[key]

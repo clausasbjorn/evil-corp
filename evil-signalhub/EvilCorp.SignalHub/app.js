@@ -128,7 +128,7 @@
         $scope.friendlyName = function (name) {
             if (name === 'b8:27:eb:31:86:7e') return "PI-1";
             if (name === 'b8:27:eb:fc:80:ea') return "PI-2";
-            if (name === 'b8:27:eb:ff:d2:b0') return "PI-3";
+            if (name === 'b8:27:eb:ff:d2:b0') return "PI-3 - Kitchen";
         }
 
         $scope.fromNow = function(date) {
