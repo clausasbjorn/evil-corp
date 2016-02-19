@@ -6,14 +6,14 @@ class EvilForm extends Component{
         let { name, ...other } = this.props;
         
         return(
-            <input
-                type="text"
-                value={name}
-              
-            />
+            <input type="text" value={name} onChange={this.handleChange} />
         );
         
-        //  onChange={this.handleChange}
+        
+    }
+    
+    handleChange(event) {
+        dispatch(setName(text));
     }
 }
 
