@@ -25,7 +25,12 @@ A typical response would be:
 
 ```json
 {
-	'ip': '10.59.9.0',
-	'hwaddr': 'b8:27:eb:38:0a:7e'
+	"ip": "10.59.9.0",
+	"hwaddr": "b8:27:eb:38:0a:7e"
 }
 ```
+
+### Limitations
+
+Evil helper can only find hardware addresses on the local network, and only
+works on Linux, and only tested on a raspberry pi.
