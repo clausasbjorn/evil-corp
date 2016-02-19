@@ -1,0 +1,63 @@
+{
+  "name": "evil-app",
+  "version": "1.0.0",
+  "description": "EvilCorp app",
+  "scripts": {
+    "build": "brunch build",
+    "start": "brunch watch --server"
+  },
+  "author": "Evil guy",
+  "license": "ISC",
+  "devDependencies": {
+    "auto-reload-brunch": "^1.8.1",
+    "babel-brunch": "^6.0.0",
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-2": "^6.5.0",
+    "brunch": "^2.2.1",
+    "classnames": "^2.2.3",
+    "javascript-brunch": "^1.8.0",
+    "less-brunch": "^1.8.1",
+    "zombie": "^4.2.1"
+  },
+  "dependencies": {
+    "history": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.0.6",
+    "react-router": "^2.0.0",
+    "react-router-redux": "^3.0.0",
+    "redux": "^3.0.6",
+    "redux-logger": "^2.4.0",
+    "redux-thunk": "^1.0.3",
+    "request": "2.69.0"
+  },
+  "overrides": {
+    "react": {
+      "main": "dist/react.js"
+    },
+    "react-dom": {
+      "main": "dist/react-dom.js"
+    },
+    "react-router": {
+      "main": "umd/ReactRouter.js"
+    },
+    "redux": {
+      "main": "dist/redux.js"
+    },
+    "react-redux": {
+      "main": "dist/react-redux.js"
+    },
+    "react-router-redux": {
+      "main": "lib/index.js"
+    },
+    "redux-logger": {
+      "main": "dist/index.js"
+    },
+    "history": {
+      "main": "umd/history.js"
+    }
+  }
+}
