@@ -12,9 +12,10 @@ function getMacRequest(){
 }
 
 function getMacSuccess(json){
+    console.log("HAPPY DAYS");
     return {
         type: GET_MAC_SUCCESS,
-        items: json
+        helperJson: json
     }
 }
 

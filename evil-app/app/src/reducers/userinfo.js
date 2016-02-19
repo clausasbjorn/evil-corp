@@ -11,7 +11,8 @@ export function userinfo(state = {}, action){
             return state;
         case GET_MAC_SUCCESS:{
             return Object.assign({}, state, {
-                items: action.items
+                hwaddr: action.helperJson.hwaddr,
+                ip: action.helperJson.ip
             });
         }
         default:
