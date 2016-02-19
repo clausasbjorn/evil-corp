@@ -6,6 +6,6 @@ export default {
         imageId: ''
     },
     ui: {
-        name: 'EvilCrop - Data harvester'
+        name: 'EvilCorp - Data harvester'
     }
 }

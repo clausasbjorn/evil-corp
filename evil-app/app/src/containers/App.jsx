@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Router, Route } from 'react-router';
-
-//import { EvilForm } from '../components';
+import { EvilForm } from '../components';
 
 class App extends Component{
     render(){
         let { title, children, ...other } = this.props;
         
         return (
-            <div>LOL</div>
+            <div>
+            {title}    
+            <EvilForm></EvilForm>   
+            </div>
         );
-    }
+    } 
 }
 
-// <Main onTempClick={text => dispatch(doTemp(text))} />
 App.propTypes = {
     title: PropTypes.string
 };
