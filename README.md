@@ -4,6 +4,8 @@ There are lots of puzzles in this solution, where you only play a
 small part. Unless you join us to take over the world, you know where to
 send the pull requests. Muhahaha...
 
+This is a project is all part of the [ARIoT 2016](http://localhost:4400/api/stickers) challenge.
+
 ### The evil api
 
 Observations is important to our goal, without them we do not know anything
