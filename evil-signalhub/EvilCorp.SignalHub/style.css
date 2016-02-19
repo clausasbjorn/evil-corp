@@ -1,0 +1,16 @@
+﻿html, body { height: 100%; background: #000; font-family: 'Roboto', sans-serif; }
+.full { height: 100%; }
+
+.logo { text-align: center;margin-top: 20px; }
+.logo img { width: 80%; }
+
+.beacon { height: 100%;background: #000; border-right: solid 1px #333; }
+.beacon-header {  background: #111;margin-bottom: 3px;  padding: 20px; color: #fff;font-size: 16px; font-weight: 900;margin-top: 20px; }
+.beacon-sub-header { background: #111;margin-bottom: 3px;  padding: 20px; color: #fff; font-weight: 700; }
+
+.person { width: 100%;background: #333; margin-bottom: 3px; padding: 10px 20px; color: #fff; }
+    .person .id { font-weight: 700; }
+
+.tracker { height: 800px; background: #333; margin: 50px;padding-top: 370px;text-align: center;color: #fff;text-transform: uppercase;font-size: 16px;font-weight: 700; }
+
+.align-right { float: right; }

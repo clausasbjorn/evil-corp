@@ -28,6 +28,7 @@ type Location = {
 [<DataContract>]
 [<CLIMutable>]
 type PersonState = {
+    [<DataMember>] Count : int ;
     [<DataMember>] Identifier : string ; 
     [<DataMember>] LastSeen : DateTime ;
     [<DataMember>] Status : byte ;
@@ -41,18 +42,22 @@ module PersonBehavior =
         | true -> state.Locations.[presence.Hotspot] <- { locations.[presence.Hotspot] with LastSeen = presence.Timestamp ; Channel = presence.Channel ; Signal = presence.Signal }
         | false -> state.Locations.Add(presence.Hotspot, { Hotspot = presence.Hotspot ; LastSeen = presence.Timestamp ; Channel = presence.Channel ; Signal = presence.Signal ; FirstSeen = DateTime.UtcNow })
 
-        state.Locations.Keys
-        |> Seq.map(fun key -> 
-            let location = state.Locations.[key]
-            { Hotspot = location.Hotspot ; LastSeen = location.LastSeen ; Channel = location.Channel ; SignalStrength = location.Signal }
-        )
-        |> (fun locations -> 
-            { Id = state.Identifier ; Locations = Seq.toArray(locations) }
-        )
-        |> JsonConvert.SerializeObject
-        |> EventPush.send 
+        match state.Count with
+        | 20 ->
+            state.Locations.Keys
+            |> Seq.map(fun key -> 
+                let location = state.Locations.[key]
+                { Hotspot = location.Hotspot ; LastSeen = location.LastSeen ; Channel = location.Channel ; SignalStrength = location.Signal }
+            )
+            |> (fun locations -> 
+                { Id = state.Identifier ; Locations = Seq.toArray(locations) }
+            )
+            |> JsonConvert.SerializeObject
+            |> EventPush.send 
 
-        state
+            { state with Count = 0 }
+        | _ ->
+            { state with Count = state.Count + 1 }
 
     let lastSeen state =
         { Id = state.Identifier ; LastSeen = state.LastSeen }
@@ -64,7 +69,8 @@ module PersonBehavior =
         update |> (hotspot presence)
 
     let initPerson actorId =
-        { Identifier = actorId
+        { Count = 0
+          Identifier = actorId
           LastSeen = DateTime.UtcNow
           Status = (byte Status.Present)
           Locations = new Dictionary<string, Location>() }

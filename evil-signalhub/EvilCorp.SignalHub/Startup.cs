@@ -1,4 +1,4 @@
-﻿
+﻿using EvilCorp.SignalHub.TrackerEvents;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -17,6 +17,14 @@ namespace EvilCorp.SignalHub
                 EnableJavaScriptProxies = true,
                 EnableDetailedErrors = true
             });
+
+            StartEventProcessor();
+        }
+
+        private void StartEventProcessor()
+        {
+            var tracker = new EventHubTrackerSource(s => { TrackerHub.Send(TrackerHub.Hub(), s); });
+            tracker.StartAsync();
         }
     }
 }

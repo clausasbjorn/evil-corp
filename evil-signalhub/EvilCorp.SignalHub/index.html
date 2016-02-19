@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>EvilCorp HQ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="Scripts/jquery-1.6.4.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,900,300,700' rel='stylesheet' type='text/css'>
+    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="Scripts/angular-signalr-hub.min.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+    <script src="app.js"></script>
+    <link href="bootstrap.theme.css" type="text/css" rel="stylesheet">
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body ng-app="evilApp" ng-controller="DashboardController">
+
+    <div class="container-fluid full">
+
+        <div class="row full">
+
+            <div class="col-lg-1 logo">
+                <img src="Content/logo.png"/>
+            </div>
+
+            <div class="col-lg-2 beacon">
+
+                <div class="beacon-header"> {{ friendlyName(locations[0].id) }}</div>
+                <div class="beacon-sub-header"> {{ locationPeopleCount[0] }} consumer<span ng-show="locationPeopleCount[0] != 1">s</span> present </div>
+
+                <div class="person" ng-repeat="(key, value) in locations[0].users">
+                    <div class="id">{{ value.id }} <span class="align-right">{{ value.signalStrength }}</span></div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-2 beacon">
+
+                <div class="beacon-header"> {{ friendlyName(locations[1].id) }} </div>
+                <div class="beacon-sub-header"> {{ locationPeopleCount[1] }} consumer<span ng-show="locationPeopleCount[1] != 1">s</span> present </div>
+
+                <div class="person" ng-repeat="(key, value) in locations[1].users">
+                    <div class="id">{{ value.id }} <span class="align-right">{{ value.signalStrength }}</span></div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-2 beacon">
+
+                <div class="beacon-header"> {{ friendlyName(locations[2].id) }} </div>
+                <div class="beacon-sub-header"> {{ locationPeopleCount[2] }} consumer<span ng-show="locationPeopleCount[2] != 1">s</span> present </div>
+
+                <div class="person" ng-repeat="(key, value) in locations[2].users">
+                    <div class="id">{{ value.id }} {{ value.signalStrength }} <span class="align-right">{{ value.signalStrength }}</span></div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-5">
+                <div class="tracker">
+                    FLOOR PLAN
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--<div ng-repeat="e in users ">
+        {{ e.id }}<br/>
+        {{ fromNow(e.lastMessage) }}<br/>
+        <br/>
+    </div>-->
+
+</body>
+</html>
