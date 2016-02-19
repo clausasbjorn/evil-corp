@@ -18,7 +18,7 @@ namespace EvilCorp.SignalHub
                 EnableDetailedErrors = true
             });
 
-            StartEventProcessor();
+            //StartEventProcessor();
         }
 
         private void StartEventProcessor()
