@@ -36,8 +36,7 @@ function getMac(){
     }
 }
 
-function setName(name) {
-    console.log("HAPPY DAYS");
+export function setName(name) {
     return {
         type: SET_NAME,
         name: name

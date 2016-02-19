@@ -7,5 +7,8 @@ export default {
     },
     ui: {
         name: 'EvilCorp - Data harvester'
+    }, 
+    lastAction: {
+        action: ''
     }
 }

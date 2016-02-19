@@ -2,23 +2,22 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 class EvilForm extends Component{
-    render(){
-        let { name, ...other } = this.props;
-        
-        return(
-            <input type="text" value={name} onChange={this.handleChange} />
-        );
-        
-        
+    constructor(props) {
+        super(props)
     }
     
-    handleChange(event) {
-        dispatch(setName(text));
+    render(){
+        let { value, onChange, ...other } = this.props;
+        
+        return(
+            <input type="text" placeholder="Hva heter du?" value={value} onChange={e => onChange(e.target.value)} />
+        );
     }
 }
 
 EvilForm.propTypes = {
-    name: PropTypes.string
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default EvilForm;
