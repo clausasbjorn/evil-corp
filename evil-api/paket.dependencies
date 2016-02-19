@@ -1,7 +1,12 @@
 source https://www.nuget.org/api/v2/
-framework = net450
+framework >= net451
 
 nuget Microsoft.ServiceFabric 4.4.87-preview
 nuget Microsoft.ServiceFabric.Data 1.4.87-preview
 nuget Microsoft.ServiceFabric.Services 1.4.87-preview
+nuget Microsoft.ServiceFabric.Actors 1.4.87-preview
 nuget Microsoft.AspNet.WebApi.OwinSelfHost 5.2.3
+nuget Microsoft.WindowsAzure.ConfigurationManager 3.1.0
+nuget WindowsAzure.ServiceBus 3.1.3
+nuget FSharp.Data 2.2.5
+nuget Newtonsoft.Json 8.0.2

@@ -1,0 +1,5 @@
+Microsoft.ServiceFabric.Actors
+Microsoft.WindowsAzure.ConfigurationManager
+WindowsAzure.ServiceBus
+FSharp.Data
+Newtonsoft.Json

@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilCorp.Identifier.AccessPoint", "EvilCorp.Identifier.AccessPoint\EvilCorp.Identifier.AccessPoint.csproj", "{D5033D99-3C6D-466B-8269-E7389252D4AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|ARM.Build.0 = Debug|ARM
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|ARM.Deploy.0 = Debug|ARM
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|x64.ActiveCfg = Debug|x64
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|x64.Build.0 = Debug|x64
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|x64.Deploy.0 = Debug|x64
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|x86.ActiveCfg = Debug|x86
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|x86.Build.0 = Debug|x86
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Debug|x86.Deploy.0 = Debug|x86
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|Any CPU.ActiveCfg = Release|x86
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|ARM.ActiveCfg = Release|ARM
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|ARM.Build.0 = Release|ARM
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|ARM.Deploy.0 = Release|ARM
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|x64.ActiveCfg = Release|x64
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|x64.Build.0 = Release|x64
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|x64.Deploy.0 = Release|x64
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|x86.ActiveCfg = Release|x86
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|x86.Build.0 = Release|x86
+		{D5033D99-3C6D-466B-8269-E7389252D4AF}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EvilCorp.SignalHub.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AIzaSyCuwgsAMonXU2wYAjz-s2hFs8Z2c692fnY</Value>
+    </Setting>
+    <Setting Name="InputAppUrlFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:50325/App/#/?connectionId={0}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
