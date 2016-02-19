@@ -54,3 +54,17 @@ type TrackerController() =
             return true
         } |> Async.StartAsTask
 
+    [<HttpPost>]
+    [<Route("userinfo")>]
+    member this.UserInfo(request : HttpRequestMessage) = 
+        async {
+//            let! json = request.Content.ReadAsStringAsync() |> Async.AwaitTask
+//
+//            try
+//                Tracker.push json
+//            with
+//            | :? Exception -> ()
+
+            return true
+        } |> Async.StartAsTask
+

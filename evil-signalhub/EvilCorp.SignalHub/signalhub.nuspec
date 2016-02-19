@@ -9,6 +9,12 @@
 	</metadata>
 	<files>
 		<file src="bin/**/*.*" target="" />
+    <file src="Content/**/*.*" target="" />
+    <file src="Scripts/**/*.*" target="" />
+    <file src="app.js" target="" />
+    <file src="bootstrap.theme.css" target="" />
+    <file src="index.html" target="" />
+    <file src="style.css" target="" />
     <file src="Web.config" target="" />
 	</files>
 </package>

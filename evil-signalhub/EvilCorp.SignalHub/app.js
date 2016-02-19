@@ -93,12 +93,23 @@
             for (var i = 0; i < o.Locations.length; i++) {
                 var location = o.Locations[i];
                 var hotspot = location.Hotspot;
+                var timestamp = location.LastSeen;
                 var index = scope.locationIndex[hotspot];
                 var signalStrength = location.SignalStrength;
 
+                var newLastMessage = new Date();
+                if (scope.locations[index].users[id]) {
+                    var currentTimestamp = scope.locations[index].users[id].timestamp;
+                    console.log(currentTimestamp + " " + timestamp);
+                    if (currentTimestamp === timestamp) {
+                        newLastMessage = scope.locations[index].users[id].lastMessage;
+                    }
+                }
+
                 scope.locations[index].users[id] = {
                     id: id,
-                    lastMessage: new Date(),
+                    timestamp: timestamp,
+                    lastMessage: newLastMessage,
                     signalStrength: signalStrength
                 }
             }
@@ -109,7 +120,7 @@
             for (var i in location.users) {
                 var user = location.users[i];
                 var since = ((new Date()) - user.lastMessage);
-                if (since > 30000)
+                if (since > 90000)
                     delete location.users[i];
                 else
                     c++;
@@ -126,8 +137,8 @@
         }
 
         $scope.friendlyName = function (name) {
-            if (name === 'b8:27:eb:31:86:7e') return "PI-1";
-            if (name === 'b8:27:eb:fc:80:ea') return "PI-2";
+            if (name === 'b8:27:eb:31:86:7e') return "PI-1 - The Room With a View";
+            if (name === 'b8:27:eb:fc:80:ea') return "PI-2 - Evil Lair";
             if (name === 'b8:27:eb:ff:d2:b0') return "PI-3 - Kitchen";
         }
 

@@ -5,3 +5,6 @@ Description=evil sensor on %I interface
 ExecStart=-/home/pi/evil-sensor.py %I
 Restart=always
 RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
