@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # ariot hackaton,
 from scapy.all import *
@@ -8,12 +9,19 @@ from datetime import datetime
 import pprint
 import requests
 import json
+from os import system
 
 # configuration
 evil_endpoint = "http://relay-dev.westeurope.cloudapp.azure.com:8888/track"
 node_name = "node-not-set"
 PROBE_REQUEST_TYPE=0
 PROBE_REQUEST_SUBTYPE=4
+interface_to_channel = {
+    'wlan0': '1',
+    'wlan1': '6',
+    'wlan2': '11',
+    'wlan3': '14'
+}
 
 already_seen = dict()
 
@@ -96,7 +104,27 @@ def SendPacket(pkt, node_name):
     #print(json.dumps(payload))
     #r = requests.post(evil_endpoint, json = payload)
     requests.post(evil_endpoint, data=json.dumps(payload), headers={"content-type": "text/javascript"})
-    
+
+def setup_interface(iface):
+    """Put the interface in monitor mode, and set channel, ugly way"""
+    print "Setting %(iface)s to monitor mode" % { 'iface': iface }
+    system("ifconfig %(iface)s down ; iwconfig %(iface)s mode monitor ; ifconfig %(iface)s up" % { 'iface': iface })
+    if iface not in interface_to_channel:
+        print "No channel found for %(iface)s, leaving at current channel" % { 'iface': iface }
+        return
+    channel = interface_to_channel[iface]
+    print "Setting channel for %(iface)s to %(channel)s" % { 'iface': iface, 'channel': channel }
+    system("iwconfig %(iface)s channel %(channel)s" % { 'iface': iface, 'channel': channel })
+
+def set_node_name():
+    """just use the mac address of eth0, or fallback to unknown"""
+    global node_name
+    f = open('/sys/class/net/eth0/address')
+    lines = f.readlines()
+    f.close()
+    if len(lines) > 0:
+        node_name = lines[0].strip()
+            
 def main():
     global node_name
     if len(sys.argv) < 2:
@@ -104,9 +132,13 @@ def main():
         sys.exit(1)
     if len(sys.argv) >= 3:
         node_name = sys.argv[2]
+    evil_interface = sys.argv[1]
+
     print "[%s] EvilCorp starting sensor" % datetime.now()
-    patch_send()
-    sniff(iface=sys.argv[1],prn=PacketHandler, store=0)
+    setup_interface(evil_interface)
+    set_node_name()
+    #patch_send() # useful for debugging
+    sniff(iface=evil_interface, prn=PacketHandler, store=0)
     
 if __name__=="__main__":
     main()
