@@ -6,5 +6,6 @@
         Identifier : string ;
         Channel : int ;
         Signal : int ;
+        Hotspot : string ;
         Timestamp : DateTime
     }

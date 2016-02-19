@@ -21,7 +21,7 @@ module Tracker =
         let presence =
             json 
             |> parse
-            |> (fun o -> { Identifier = o.Source ; Channel = o.ChannelNumber ; Signal = o.DBmAntSignal ; Timestamp = o.Timestamp })
+            |> (fun o -> { Identifier = o.Source ; Channel = o.ChannelNumber ; Signal = o.DBmAntSignal ; Hotspot = o.NodeName ; Timestamp = o.Timestamp })
 
         let person =
             presence.Identifier
