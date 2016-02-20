@@ -3,7 +3,9 @@ import {
     GET_MAC_REQUEST, 
     GET_MAC_SUCCESS, 
     GET_MAC_FAILURE,
-    SET_NAME
+    SET_NAME,
+    TAKE_PICTURE,
+    PICTURE_TAKEN
 } from '../constants/ActionTypes';
 
 function getMacRequest(){   
@@ -41,6 +43,19 @@ export function setName(name) {
         type: SET_NAME,
         name: name
     }    
+}
+
+export function takePicture(){   
+    return {
+        type: TAKE_PICTURE
+    }
+}
+
+export function pictureTaken(pictureId){   
+    return {
+        type: PICTURE_TAKEN,
+        pictureId: pictureId
+    }
 }
 
 export function fetchUserinfo(){

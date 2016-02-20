@@ -6,7 +6,7 @@ import { createHashHistory } from 'history';
 
 import createRoutes from './routes';
 import configureStore from './store/configureStore';
-import { fetchUserinfo, takePicutre, pictureTaken, sendUserinfo } from './actions/userinfo';
+import { fetchUserinfo, takePicture, pictureTaken } from './actions/userinfo';
 
 import {
     SET_NAME,
@@ -60,11 +60,13 @@ const sock = {
                 }
             }
             
-            $.connection.hub.url = 'http://evil-signalhub.azurewebsites.net/signalr/hubs';
+            //$.connection.hub.url = 'http://evil-signalhub.azurewebsites.net/signalr/hubs';
+            $.connection.hub.url = 'http://localhost:5781/signalr/hubs';
             $.connection.hub.start()
                 .done(function () {
                     console.log('Now connected, connection ID=' + $.connection.hub.id);
                     store.dispatch(fetchUserinfo());
+                    store.dispatch(takePicture());
                 })
                 .fail(function (err) {
                     console.log('Could not connect to server.', err);
