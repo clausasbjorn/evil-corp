@@ -34,7 +34,7 @@ namespace EvilCorp.SignalHub.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://hansarnevartdal.github.io/evil-app/#/?connectionId={0}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://hansarnevartdal.github.io/evil-app/#/?connectionId={0}")]
         public string InputAppUrlFormat {
             get {
                 return ((string)(this["InputAppUrlFormat"]));
