@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web;
 using EvilCorp.SignalHub.GoogleApi;
@@ -28,7 +30,13 @@ namespace EvilCorp.SignalHub
 
         public void SaveIdentity(string mac, string name, string pictureId)
         {
-            //TODO: Push to API
+            var userinfo = new Userinfo() {hwaddr = mac, name = name, pictureId = pictureId};
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://relay-dev.westeurope.cloudapp.azure.com:8888");
+                var result = client.PostAsync<Userinfo>("/userinfo", userinfo, new JsonMediaTypeFormatter()).Result;
+            }
+
         }
 
 
@@ -60,5 +68,12 @@ namespace EvilCorp.SignalHub
             Debug.WriteLine("Reconnected: " + Context.ConnectionId);
             return (base.OnReconnected());
         }
+    }
+
+    public class Userinfo
+    {
+        public string hwaddr { get; set; }
+        public string name { get; set; }
+        public string pictureId { get; set; }
     }
 }
