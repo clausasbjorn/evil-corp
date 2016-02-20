@@ -20,6 +20,12 @@ Delivers observations done on the raspberry pi to the api.
 
 Details can be found at [evil-sensor](https://github.com/clausasbjorn/evil-corp/tree/master/evil-sensor/).
 
+### The evil app (optional)
+
+This is the trickster that will get your MAC address (from the evil helper, see below), your name, and trigger a picture when opening it. It will send all this to our signal hub, conecting it to the data from the evil sensor.
+
+Details can be found at [evil-app](https://github.com/clausasbjorn/evil-corp/tree/master/evil-app/).
+
 ### The evil helper (optional)
 
 Sometimes it is not enough to observe alone, in those cases it is nice to
