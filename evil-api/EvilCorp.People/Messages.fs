@@ -4,6 +4,20 @@ open System
 
 module Messages = 
 
+    type Calibration = {
+        Id: string 
+        X: int
+        Y : int
+        Timestamp : DateTime
+    }
+
+    type Info = {
+        Id: string 
+        Name: string
+        PictureId : string
+        Timestamp : DateTime
+    }
+
     type LastSeen = {
         Id : string 
         LastSeen : DateTime }
@@ -16,6 +30,11 @@ module Messages =
     
     type Locations = {
         Id : string
+        Name : string
+        PictureId : string
+        X : int
+        Y : int
+        Ssid : string[]
         Locations : Location[]
     }
 

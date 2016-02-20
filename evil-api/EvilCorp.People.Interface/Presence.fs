@@ -7,5 +7,6 @@
         Channel : int ;
         Signal : int ;
         Hotspot : string ;
+        Ssid : string ;
         Timestamp : DateTime
     }

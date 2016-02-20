@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.js" />
+    <Content Include="Content\header-bg.png" />
     <Content Include="Content\logo.png" />
     <Content Include="index.html" />
     <Content Include="packages.config" />
@@ -169,6 +170,7 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\ocanvas-2.8.3.min.js" />
     <Content Include="signalhub.nuspec" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

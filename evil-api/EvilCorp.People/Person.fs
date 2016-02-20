@@ -32,6 +32,11 @@ type PersonState = {
     [<DataMember>] Identifier : string ; 
     [<DataMember>] LastSeen : DateTime ;
     [<DataMember>] Status : byte ;
+    [<DataMember>] Name : string ;
+    [<DataMember>] PictureId : string ;
+    [<DataMember>] X : int ;
+    [<DataMember>] Y : int ;
+    [<DataMember>] Ssid : List<string> ;
     [<DataMember>] Locations : Dictionary<string, Location> }
 
 module PersonBehavior =
@@ -43,14 +48,14 @@ module PersonBehavior =
         | false -> state.Locations.Add(presence.Hotspot, { Hotspot = presence.Hotspot ; LastSeen = presence.Timestamp ; Channel = presence.Channel ; Signal = presence.Signal ; FirstSeen = DateTime.UtcNow })
 
         match state.Count with
-        | 5 ->
+        | 4 ->
             state.Locations.Keys
             |> Seq.map(fun key -> 
                 let location = state.Locations.[key]
                 { Hotspot = location.Hotspot ; LastSeen = location.LastSeen ; Channel = location.Channel ; SignalStrength = location.Signal }
             )
             |> (fun locations -> 
-                { Id = state.Identifier ; Locations = Seq.toArray(locations) }
+                { Id = state.Identifier ; Name = state.Name ; PictureId = state.PictureId ; X = state.X ; Y = state.Y ; Ssid = Seq.toArray(state.Ssid) ; Locations = Seq.toArray(locations) }
             )
             |> JsonConvert.SerializeObject
             |> EventPush.send 
@@ -59,6 +64,11 @@ module PersonBehavior =
         | _ ->
             { state with Count = state.Count + 1 }
 
+    let addSsid (ssid : string) state = 
+        match state.Ssid.Contains(ssid) with
+        | true -> ()
+        | false -> state.Ssid.Add(ssid)
+        
     let lastSeen state =
         { Id = state.Identifier ; LastSeen = state.LastSeen }
         |> JsonConvert.SerializeObject
@@ -66,13 +76,37 @@ module PersonBehavior =
         
     let received (presence : Presence) state =
         let update = { state with Status = (byte Status.Present) ; LastSeen = presence.Timestamp }
+        update |> (addSsid presence.Ssid)
         update |> (hotspot presence)
+
+    let updateInfo (info : EvilCorp.People.Interface.Info) (state : PersonState) =
+        let update = { state with Name = info.Name ; PictureId = info.PictureId }
+        
+        { Id = update.Identifier ; Name = update.Name ; PictureId = update.PictureId ; Timestamp = DateTime.UtcNow }
+        |> JsonConvert.SerializeObject
+        |> EventPush.send 
+
+        update
+
+    let calibrate (calibration : EvilCorp.People.Interface.Calibration) (state : PersonState) =
+        let update = { state with X = calibration.X ; Y = calibration.Y }
+        
+        { Id = update.Identifier ; X = update.X ; Y = update.Y ; Timestamp = DateTime.UtcNow }
+        |> JsonConvert.SerializeObject
+        |> EventPush.send 
+
+        update
 
     let initPerson actorId =
         { Count = 0
           Identifier = actorId
           LastSeen = DateTime.UtcNow
           Status = (byte Status.Present)
+          Name = ""
+          PictureId = ""
+          X = -1
+          Y = -1
+          Ssid = new List<string>()
           Locations = new Dictionary<string, Location>() }
             
 type Person() = 
@@ -86,6 +120,12 @@ type Person() =
 
         member this.Seen(presence) =
             this -!> (PersonBehavior.received presence)
+
+        member this.SetInfo(info) =
+            this -!> (PersonBehavior.updateInfo info)
+
+        member this.Calibrate(calibration) =
+            this -!> (PersonBehavior.calibrate calibration)
 
 
 

@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Presence.fs" />
+    <Compile Include="Calibration.fs" />
+    <Compile Include="Info.fs" />
     <Compile Include="IPerson.fs" />
     <Compile Include="PersonFactory.fs" />
     <None Include="paket.references" />
