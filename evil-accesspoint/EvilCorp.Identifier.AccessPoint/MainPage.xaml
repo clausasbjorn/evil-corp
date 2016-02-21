@@ -15,9 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="/Assets/unicorn-profile.png" Stretch="UniformToFill" />
-        </Grid.Background>-->
+
         <Image Source="/Assets/unicorn-profile.png" Margin="10,10,10,10" Width="{Binding Path=Height, RelativeSource={RelativeSource Self}}" VerticalAlignment="Stretch" Grid.Row="0"  Grid.Column="0"/>
         <Image Source="{Binding ControlQrc}"  Margin="10,10,10,10" Width="{Binding Path=Height, RelativeSource={RelativeSource Self}}" VerticalAlignment="Stretch" Grid.Row="0"  Grid.Column="1" />
     </Grid>
