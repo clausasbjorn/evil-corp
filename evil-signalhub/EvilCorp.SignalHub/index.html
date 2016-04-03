@@ -31,11 +31,11 @@
             <div class="col-lg-2 beacon">
 
                 <div class="beacon-header"> {{ friendlyName(locations[0].id) }}</div>
-                <!--<div class="beacon-sub-header"> {{ locationPeopleCount[0] }} consumer<span ng-show="locationPeopleCount[0] != 1">s</span> present </div>-->
+                <!--<div class="beacon-sub-header"> {{ locationPeopleCount[0] }} Person<span ng-show="locationPeopleCount[0] != 1">s</span> present </div>-->
                 <div class="beacon-sub-header">
                     <div class="numeric-large">{{ locationPeopleCount[0] }}</div>
                     <div class="label-large">
-                        Consumer<span ng-show="locationPeopleCount[0] != 1">s</span> present
+                        Person<span ng-show="locationPeopleCount[0] != 1">s</span> present
                     </div>
                 </div>
                 <!--<div class="beacon-sub-header">
@@ -46,7 +46,8 @@
 
                 <div class="person" ng-repeat="(key, value) in locations[0].users" ng-class="{ 'selected': value.id === selectedId }">
                     <div class="id" ng-click="select(value.id)">
-                        {{ value.id }}
+                        <span ng-show="users[value.id].name !== ''">{{ users[value.id].name }}</span>
+                        <span ng-show="users[value.id].name === ''">{{ value.id }}</span>
                         <span class="align-right" ng-class="{ 'red': strengthRank(0, value.signalStrength) == 0, 'yellow': strengthRank(0, value.signalStrength) == 1, 'green': strengthRank(0, value.signalStrength) == 2 }">{{ value.signalStrength }}</span>
                     </div>
                 </div>
@@ -56,11 +57,11 @@
             <div class="col-lg-2 beacon">
 
                 <div class="beacon-header"> {{ friendlyName(locations[1].id) }} </div>
-                <!--<div class="beacon-sub-header"> {{ locationPeopleCount[1] }} consumer<span ng-show="locationPeopleCount[1] != 1">s</span> present </div>-->
+                <!--<div class="beacon-sub-header"> {{ locationPeopleCount[1] }} Person<span ng-show="locationPeopleCount[1] != 1">s</span> present </div>-->
                 <div class="beacon-sub-header">
                     <div class="numeric-large">{{ locationPeopleCount[1] }}</div>
                     <div class="label-large">
-                        Consumer<span ng-show="locationPeopleCount[1] != 1">s</span> present
+                        Person<span ng-show="locationPeopleCount[1] != 1">s</span> present
                     </div>
                 </div>
                 <!--<div class="beacon-sub-header">
@@ -71,7 +72,8 @@
 
                 <div class="person" ng-repeat="(key, value) in locations[1].users" ng-class="{ 'selected': value.id === selectedId }">
                     <div class="id" ng-click="select(value.id)">
-                        {{ value.id }}
+                        <span ng-show="users[value.id].name !== ''">{{ users[value.id].name }}</span>
+                        <span ng-show="users[value.id].name === ''">{{ value.id }}</span>
                         <span class="align-right" ng-class="{ 'red': strengthRank(1, value.signalStrength) == 0, 'yellow': strengthRank(1, value.signalStrength) == 1, 'green': strengthRank(1, value.signalStrength) == 2 }">{{ value.signalStrength }}</span>
                     </div>
                 </div>
@@ -81,11 +83,11 @@
             <div class="col-lg-2 beacon">
 
                 <div class="beacon-header"> {{ friendlyName(locations[2].id) }} </div>
-                <!--<div class="beacon-sub-header"> {{ locationPeopleCount[2] }} consumer<span ng-show="locationPeopleCount[2] != 1">s</span> present</div>-->
+                <!--<div class="beacon-sub-header"> {{ locationPeopleCount[2] }} Person<span ng-show="locationPeopleCount[2] != 1">s</span> present</div>-->
                 <div class="beacon-sub-header">
                     <div class="numeric-large">{{ locationPeopleCount[2] }}</div>
                     <div class="label-large">
-                        Consumer<span ng-show="locationPeopleCount[2] != 1">s</span> present
+                        Person<span ng-show="locationPeopleCount[2] != 1">s</span> present
                     </div>
                 </div>
                 <!--<div class="beacon-sub-header">
@@ -96,7 +98,8 @@
 
                 <div class="person" ng-repeat="(key, value) in locations[2].users" ng-class="{ 'selected': value.id === selectedId }">
                     <div class="id" ng-click="select(value.id)">
-                        {{ value.id }}
+                        <span ng-show="users[value.id].name !== ''">{{ users[value.id].name }}</span>
+                        <span ng-show="users[value.id].name === ''">{{ value.id }}</span>
                         <span class="align-right" ng-class="{ 'red': strengthRank(2, value.signalStrength) == 0, 'yellow': strengthRank(2, value.signalStrength) == 1, 'green': strengthRank(2, value.signalStrength) == 2 }">{{ value.signalStrength }}</span>
                     </div>
                 </div>
@@ -104,9 +107,40 @@
             </div>
 
             <div class="col-lg-6">
-                <div class="tracker">
+                <div class="tracker" ng-show="selectedId">
 
+                    <div class="beacon-header"> Person Tracker </div>
                     <canvas id="trackermap" height="500" width="500"></canvas>
+
+                </div>
+
+                <div class="profile" ng-show="selectedId">
+
+                    <div class="beacon-header"> Profile </div>
+
+                    <!--<div class="beacon-sub-header name">
+                        <div ng-show="users[selectedId].name !== ''" class="label-large">Name: {{ users[selectedId].name }}</div>
+                        <div ng-show="users[selectedId].name === ''" class="label-large">ID: {{ users[selectedId].id }}</div>
+                    </div>-->
+
+                    <div class="beacon-sub-header">
+                        <div ng-show="users[selectedId].name !== ''" class="numeric-slarge">{{ users[selectedId].name }}</div>
+                        <div ng-show="users[selectedId].name === ''" class="numeric-slarge">{{ users[selectedId].id }}</div>
+                        <div class="label-large">
+                            <div ng-show="users[selectedId].name !== ''">Name</div>
+                            <div ng-show="users[selectedId].name === ''">ID / MAC</div>
+                        </div>
+                    </div>
+
+                    <div class="beacon-sub-header">
+                        Known SSIDs
+                    </div>
+
+                    <div class="person" ng-if="s !== ''" ng-repeat="s in users[selectedId].ssid">
+                        <div class="id">
+                            {{ s }}
+                        </div>
+                    </div>
 
                 </div>
             </div>

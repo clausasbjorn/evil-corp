@@ -82,6 +82,7 @@
             { min: 0, max: -100, range: 100 },
             { min: 0, max: -100, range: 100 }
         ];
+        $scope.ssid = {};
         $scope.coords = {};
         $scope.selectedId = null;
 
@@ -129,12 +130,26 @@
 
         var update = function(scope, o) {
             var id = o.Id;
+
+            if (scope.selectedId === id && o.X && o.Y && o.Timestamp) {
+                console.log(o);
+                if (o.X > -1 && o.Y > -1 && !o.Locations) {
+                    updateCalibration(scope, o.X, o.Y);
+                }
+            }
+
+            if (!o.Locations)
+                return;
+
             scope.users[id] = {
                 id: id,
                 lastMessage: new Date(),
-                locations: o.Locations
+                locations: o.Locations,
+                name: o.Name,
+                pictureId: o.PictureId,
+                ssid: o.Ssid
             };
-
+            
             for (var i = 0; i < o.Locations.length; i++) {
                 var location = o.Locations[i];
                 var hotspot = location.Hotspot;
@@ -172,6 +187,7 @@
         }
 
         var canvas = oCanvas.create({ canvas: "#trackermap" });
+        var calibrationPoints = [];
         var points = [];
         var lines = [];
 
@@ -194,18 +210,38 @@
             canvas.addChild(line);
         }
 
-        var drawPoint = function (x, y) {
+        var drawPoint = function (x, y, radius, color, isCalibration) {
+            if (!color)
+                color = "#fff";
+            if (!radius)
+                radius = 5;
+
             var point = canvas.display.ellipse({
                 x: x,
                 y: y,
-                radius: 5,
+                radius: radius,
                 stroke: "transparent",
-                fill: "#fff"
+                fill: color
             });
             canvas.addChild(point);
-            points.push(point);
+
+            if (isCalibration)
+                calibrationPoints.push(point);
+            else 
+                points.push(point);
         }
 
+        var updateCalibration = function(scope, x, y) {
+            var x1 = 500 * (x / 100);
+            var y1 = 500 * (y / 100);
+
+            for (var i = 0; i < calibrationPoints.length; i++)
+                canvas.removeChild(calibrationPoints[i]);
+
+            drawPoint(x1, y1, 20, "#ff614c", true);
+            drawPoint(x1, y1, 15, "#ff3d23", true);
+            drawPoint(x1, y1, 10, "#ff1e00", true);
+        }
         
         var updateDrawing = function(scope) {
             var id = scope.selectedId;
@@ -230,8 +266,6 @@
             drawLine(c0, c0, c2X, c2Y);
             drawLine(c1X, c1Y, c0, c0);
             drawLine(c2X, c2Y, c1X, c1Y);
-
-            console.log(coords);
         }
 
         var washLocation = function (scope, index, location) {
@@ -279,10 +313,21 @@
             return moment(date).fromNow() + " " + Math.random();
         };
 
-        $scope.seen = function(scope, data) {
-            update(scope, parse(data));
-            updateDrawing(scope);
-            wash(scope);
+        $scope.seen = function (scope, data) {
+            var parsed = parse(data);
+            
+            if (parsed.Timestamp && parsed.Name) {
+                if (!scope.users[parsed.Id]) return;
+                scope.users[parsed.Id].name = parsed.Name;
+                scope.users[parsed.Id].pictureId = parsed.PictureId;
+            }
+            if (parsed.Timestamp && parsed.X) {
+                updateCalibration(scope, parsed.X, parsed.Y);
+            } else {
+                update(scope, parsed);
+                updateDrawing(scope);
+                wash(scope);
+            }
         };
 
         (function(scope) {

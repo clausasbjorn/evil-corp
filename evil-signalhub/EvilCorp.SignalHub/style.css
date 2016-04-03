@@ -10,18 +10,23 @@
 .beacon { height: 100%;background: #000; border-right: solid 1px #333; }
 .beacon-header {  background: #111 url("/content/header-bg.png"); margin-bottom: 3px;  padding: 20px; color: #fff;font-size: 16px; font-weight: 900;margin-top: 20px; text-transform: uppercase; }
 .beacon-sub-header { background: #111;margin-bottom: 3px;  padding: 20px; color: #fff; font-weight: 700; }
-
+    
 .person { width: 100%;background: #333; cursor: pointer; margin-bottom: 3px; padding: 0 0 0 20px; font-size: 11px; height: 22px; line-height: 22px; color: #fff; }
     .person .id { font-weight: 700; }
     .person.selected { background: #0076e4; }
 
-.tracker { margin-top: 20px; }
+.tracker { width: 500px;float: left; }
 #trackermap { background: #111; }
+
+.profile { width: 300px;float: left; margin-left: 20px;}
 
 .align-right { float: right; }
 
 .numeric-large { font-size: 36px; }
+.numeric-slarge { font-size: 26px; }
+
 .label-large { opacity: 0.4; }
+    .beacon-sub-header.name .label-large { opacity: 1; }
 
 .red { background: #e50000; padding: 0 20px; }
 .yellow { background: #f3f52b; padding: 0 20px;color: #000; }
