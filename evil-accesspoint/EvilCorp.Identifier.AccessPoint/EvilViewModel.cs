@@ -1,5 +1,7 @@
 ﻿using System;
+using Windows.Media.Capture;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.AspNet.SignalR.Client;
 using PropertyChanged;
@@ -16,8 +18,8 @@ namespace EvilCorp.Identifier.AccessPoint
         {
             _dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
 
-            var connection = new HubConnection("http://localhost:5781/signalr");
-            //var connection = new HubConnection("http://time-share-robot-server.azurewebsites.net/signalr");
+            //var connection = new HubConnection("http://localhost:5781/signalr");
+            var connection = new HubConnection("http://evil-signalhub.azurewebsites.net/signalr");
             proxy = connection.CreateHubProxy("EvilHub");
 
             RegisterEventHandlers(proxy);
@@ -49,5 +51,6 @@ namespace EvilCorp.Identifier.AccessPoint
         }
 
         public BitmapImage ControlQrc { get; set; }
+
     }
 }

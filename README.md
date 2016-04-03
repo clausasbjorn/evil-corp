@@ -14,11 +14,27 @@ component for that.
 
 Details can be found at [evil-api](https://github.com/clausasbjorn/evil-corp/tree/master/evil-api/).
 
+### The evil signal hub
+
+This is connection between the evil app, evil accesspoint, events from our evil api, and the friendly dashboard we use to follow you.
+
+Details can be found at [evil-signalhub](https://github.com/clausasbjorn/evil-corp/tree/master/evil-signalhub).
+
 ### The evil sensor
 
 Delivers observations done on the raspberry pi to the api.
 
 Details can be found at [evil-sensor](https://github.com/clausasbjorn/evil-corp/tree/master/evil-sensor/).
+
+### The evil access point
+This is a niftly little thing that connects to the singal hub and gets a QR code linking to the evil app. When someone opens the evil app, the evil access point takes your picture. And uploads it to a safe, safe, place.
+Details can be found at [evil-accesspoint](https://github.com/clausasbjorn/evil-corp/tree/master/evil-accesspoint).
+
+### The evil app
+
+This is the trickster that will get your MAC address (from the evil helper, see below), your name, and trigger a picture when opening it. It will send all this to our signal hub, conecting it to the data from the evil sensor.
+
+Details can be found at [evil-app](https://github.com/clausasbjorn/evil-corp/tree/master/evil-app/).
 
 ### The evil helper (optional)
 
