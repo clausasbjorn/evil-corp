@@ -1,0 +1,91 @@
+﻿﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>EvilCorp HQ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,400,900,300,700' rel='stylesheet' type='text/css'>
+    <script>
+        (function() {
+
+            var app = angular.module('evilApp', []);
+
+            app.controller('DashboardController', ['$scope', '$http', function($scope, $http) {
+
+                $scope.data = [];
+
+                var update = function() {
+                    $http.get('http://localhost:8888/stats').success(function(data) {
+                        $scope.data = data.Result;
+                    });
+                }
+
+                setInterval(update, 3000);
+            }]);
+
+        })();
+
+    </script>
+    <style>
+        ﻿html, body { height: 100%; background: #000; font-family: 'Roboto', sans-serif; }
+        .full { height: 100%; }
+
+        .header { background: #111; padding: 0 20px; height: 100px; line-height: 100px; }
+        .header img.logo { width: 60px; margin-left: 10px; }
+        .header h1 { display: inline; clear: none; position: relative; top: 6px; font-family: 'Roboto', sans-serif; font-weight: 100; color: #fff; font-size: 26px; }
+
+        .partition { height: 60px; line-height: 60px; display: inline-block; margin: 0 20px 0 28px; border-left: solid 1px #333; }
+
+        .beacon { height: 100%;background: #000; border-right: solid 1px #333; }
+        .beacon-header {  background: #111 url("/content/header-bg.png"); margin-bottom: 3px;  padding: 40px; color: #fff;font-size: 16px; font-weight: 900;margin-top: 20px; text-transform: uppercase; }
+        .beacon-sub-header { background: #111;margin-bottom: 3px;  padding: 10px 40px; color: #fff; font-weight: 700; }
+    
+        .person { width: 100%;background: #333; cursor: pointer; margin-bottom: 3px; padding: 0 0 0 20px; font-size: 11px; height: 22px; line-height: 22px; color: #fff; }
+            .person .id { font-weight: 700; }
+            .person.selected { background: #0076e4; }
+
+        .tracker { width: 500px;float: left; }
+        #trackermap { background: #111; }
+
+        .profile { width: 300px;float: left; margin-left: 20px;}
+
+        .align-right { float: right; }
+        
+        .numeric-xlarge { font-size: 72px; }
+        .numeric-large { font-size: 36px; }
+        .numeric-slarge { font-size: 26px; }
+
+        .label-large { opacity: 0.4; }
+            .beacon-sub-header.name .label-large { opacity: 1; }
+
+        .red { background: #e50000; padding: 0 20px; }
+        .yellow { background: #f3f52b; padding: 0 20px;color: #000; }
+        .green { background: #96d402; padding: 0 20px;color: #000; }
+    </style>
+</head>
+<body ng-app="evilApp" ng-controller="DashboardController">
+
+    <div class="container-fluid full">
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+
+                <div class="beacon-header">
+                    <div class="numeric-xlarge">{{ data.length }}</div>
+                    <div class="numeric-slarge .label-large">Nearby</div>
+                </div>
+
+                <div class="beacon-sub-header" ng-repeat="d in data">
+                    <div class="numeric-slarge">{{ d.Key }} <span class="label-large">is looking for</span> {{ d.Value }}</div>
+                </div>
+
+
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -16,7 +16,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EvilCorp.Ingest\EvilCorp.Ingest.fsproj" />
-    <ProjectReference Include="..\EvilCorp.People\EvilCorp.People.fsproj" />
+    <ProjectReference Include="..\EvilCorp.Phones\EvilCorp.Phones.csproj" />
+    <ProjectReference Include="..\EvilCorp.Stats\EvilCorp.Stats.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="pkg\" />

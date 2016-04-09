@@ -19,11 +19,13 @@ type OwinAppBuilder() =
         formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"))
         
     member this.Configuration(appBuilder : IAppBuilder) =
-        let config = new HttpConfiguration();
+        let config = new HttpConfiguration()
 
-        config.MapHttpAttributeRoutes();
-        this.ConfigureFormatters(config.Formatters);
+        config.MapHttpAttributeRoutes()
+        config.EnableCors()
 
+        this.ConfigureFormatters(config.Formatters)
+        
         appBuilder.UseWebApi(config) |> ignore
 
 type OwinCommunicationListener(appRoot : string, startup : OwinAppBuilder, parameters : ServiceInitializationParameters) =
